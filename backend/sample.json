@@ -1,0 +1,683 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 366417991,
+                "timestamp": "2013-10-18T08:54:59Z",
+                "user": "BMTer",
+                "uid": 1776325,
+                "version": 2
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.770058,
+                    10.8508548
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 366420729,
+                "timestamp": "2018-07-12T08:29:03Z",
+                "user": "mutpuri",
+                "uid": 7795551,
+                "version": 5
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.7713294,
+                    10.8514874
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 2333139498,
+                "timestamp": "2018-07-12T08:29:03Z",
+                "user": "mutpuri",
+                "uid": 7795551,
+                "version": 2
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.7712748,
+                    10.8506061
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 2333139499,
+                "timestamp": "2018-07-12T08:29:03Z",
+                "user": "mutpuri",
+                "uid": 7795551,
+                "version": 4
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.771603,
+                    10.8501398
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 2333139500,
+                "timestamp": "2018-07-12T08:29:03Z",
+                "user": "mutpuri",
+                "uid": 7795551,
+                "version": 2
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.7712856,
+                    10.8507904
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 2333139501,
+                "timestamp": "2018-07-12T08:29:03Z",
+                "user": "mutpuri",
+                "uid": 7795551,
+                "version": 2
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.7713446,
+                    10.8504533
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 2500263306,
+                "tags": {
+                    "entrance": "main",
+                    "name": "C\u1ed5ng Ch\u00ednh"
+                },
+                "timestamp": "2023-10-16T09:38:27Z",
+                "user": "phoenixsaigon1698",
+                "uid": 3323343,
+                "version": 7
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.7716508,
+                    10.8499244
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 2969182877,
+                "timestamp": "2014-07-18T17:16:27Z",
+                "user": "528491",
+                "uid": 1377843,
+                "version": 1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.7713341,
+                    10.8513117
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 2969182878,
+                "timestamp": "2014-07-18T17:16:27Z",
+                "user": "528491",
+                "uid": 1377843,
+                "version": 1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.7713047,
+                    10.8513142
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 2969182887,
+                "timestamp": "2018-07-12T08:29:03Z",
+                "user": "mutpuri",
+                "uid": 7795551,
+                "version": 2
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.7713192,
+                    10.8513964
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 3100746028,
+                "timestamp": "2014-09-28T18:52:11Z",
+                "user": "528491",
+                "uid": 1377843,
+                "version": 1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.7718432,
+                    10.8502017
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 3100749430,
+                "timestamp": "2014-09-28T18:52:11Z",
+                "user": "528491",
+                "uid": 1377843,
+                "version": 1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.7716001,
+                    10.8502128
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 3100749431,
+                "timestamp": "2014-09-28T18:52:11Z",
+                "user": "528491",
+                "uid": 1377843,
+                "version": 1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.7718753,
+                    10.850229
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 3100749432,
+                "timestamp": "2014-09-28T18:52:11Z",
+                "user": "528491",
+                "uid": 1377843,
+                "version": 1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.7714002,
+                    10.8504837
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 3100749434,
+                "timestamp": "2014-09-28T18:52:11Z",
+                "user": "528491",
+                "uid": 1377843,
+                "version": 1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.7719022,
+                    10.850501
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 3100749436,
+                "timestamp": "2014-09-28T18:52:11Z",
+                "user": "528491",
+                "uid": 1377843,
+                "version": 1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.7718194,
+                    10.850559
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 3100749438,
+                "timestamp": "2014-09-28T18:52:11Z",
+                "user": "528491",
+                "uid": 1377843,
+                "version": 1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.771351,
+                    10.8506018
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 3100749439,
+                "timestamp": "2014-09-28T18:52:11Z",
+                "user": "528491",
+                "uid": 1377843,
+                "version": 1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.7717674,
+                    10.8506119
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 3100749443,
+                "timestamp": "2014-09-28T18:52:12Z",
+                "user": "528491",
+                "uid": 1377843,
+                "version": 1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.7717561,
+                    10.8507039
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 3100749444,
+                "timestamp": "2014-09-28T18:52:12Z",
+                "user": "528491",
+                "uid": 1377843,
+                "version": 1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.7713658,
+                    10.8507574
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 5125105363,
+                "timestamp": "2018-07-12T08:29:03Z",
+                "user": "mutpuri",
+                "uid": 7795551,
+                "version": 2
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.7725903,
+                    10.8506747
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 5125105364,
+                "timestamp": "2017-09-23T19:41:40Z",
+                "user": "danghovu",
+                "uid": 6696150,
+                "version": 1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.7719539,
+                    10.8507346
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "node",
+                "id": 7924909181,
+                "timestamp": "2020-09-20T08:37:08Z",
+                "user": "Hoang Tran 07",
+                "uid": 11817930,
+                "version": 1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.770388,
+                    10.8508375
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "way",
+                "id": 224492699,
+                "tags": {
+                    "bicycle": "private",
+                    "foot": "yes",
+                    "highway": "service",
+                    "motor_vehicle": "private",
+                    "surface": "asphalt"
+                },
+                "nodes": [
+                    2500263306,
+                    2333139499,
+                    2333139501,
+                    2333139498,
+                    2333139500
+                ],
+                "timestamp": "2023-10-16T09:38:27Z",
+                "user": "phoenixsaigon1698",
+                "uid": 3323343,
+                "version": 7
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        106.7716508,
+                        10.8499244
+                    ],
+                    [
+                        106.771603,
+                        10.8501398
+                    ],
+                    [
+                        106.7713446,
+                        10.8504533
+                    ],
+                    [
+                        106.7712748,
+                        10.8506061
+                    ],
+                    [
+                        106.7712856,
+                        10.8507904
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "way",
+                "id": 305448096,
+                "tags": {
+                    "landuse": "grass"
+                },
+                "nodes": [
+                    3100749444,
+                    3100749438,
+                    3100749432,
+                    3100749430,
+                    3100746028,
+                    3100749431,
+                    3100749434,
+                    3100749436,
+                    3100749439,
+                    3100749443,
+                    3100749444
+                ],
+                "timestamp": "2014-09-28T18:52:12Z",
+                "user": "528491",
+                "uid": 1377843,
+                "version": 1
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            106.7713658,
+                            10.8507574
+                        ],
+                        [
+                            106.771351,
+                            10.8506018
+                        ],
+                        [
+                            106.7714002,
+                            10.8504837
+                        ],
+                        [
+                            106.7716001,
+                            10.8502128
+                        ],
+                        [
+                            106.7718432,
+                            10.8502017
+                        ],
+                        [
+                            106.7718753,
+                            10.850229
+                        ],
+                        [
+                            106.7719022,
+                            10.850501
+                        ],
+                        [
+                            106.7718194,
+                            10.850559
+                        ],
+                        [
+                            106.7717674,
+                            10.8506119
+                        ],
+                        [
+                            106.7717561,
+                            10.8507039
+                        ],
+                        [
+                            106.7713658,
+                            10.8507574
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "way",
+                "id": 607291206,
+                "tags": {
+                    "bicycle": "private",
+                    "foot": "yes",
+                    "highway": "service",
+                    "motor_vehicle": "private",
+                    "surface": "asphalt"
+                },
+                "nodes": [
+                    2333139500,
+                    5125105364,
+                    5125105363
+                ],
+                "timestamp": "2018-07-12T08:29:03Z",
+                "user": "mutpuri",
+                "uid": 7795551,
+                "version": 1
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        106.7712856,
+                        10.8507904
+                    ],
+                    [
+                        106.7719539,
+                        10.8507346
+                    ],
+                    [
+                        106.7725903,
+                        10.8506747
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "way",
+                "id": 607291209,
+                "tags": {
+                    "bicycle": "private",
+                    "foot": "yes",
+                    "highway": "service",
+                    "horse": "no",
+                    "motor_vehicle": "private",
+                    "surface": "asphalt"
+                },
+                "nodes": [
+                    2333139500,
+                    2969182877,
+                    2969182878,
+                    2969182887,
+                    366420729
+                ],
+                "timestamp": "2018-07-12T08:29:03Z",
+                "user": "mutpuri",
+                "uid": 7795551,
+                "version": 1
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        106.7712856,
+                        10.8507904
+                    ],
+                    [
+                        106.7713341,
+                        10.8513117
+                    ],
+                    [
+                        106.7713047,
+                        10.8513142
+                    ],
+                    [
+                        106.7713192,
+                        10.8513964
+                    ],
+                    [
+                        106.7713294,
+                        10.8514874
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "way",
+                "id": 695757489,
+                "tags": {
+                    "bicycle": "private",
+                    "foot": "yes",
+                    "highway": "service",
+                    "horse": "no",
+                    "motor_vehicle": "private",
+                    "surface": "asphalt"
+                },
+                "nodes": [
+                    366417991,
+                    7924909181,
+                    2333139500
+                ],
+                "timestamp": "2020-09-20T08:37:08Z",
+                "user": "Hoang Tran 07",
+                "uid": 11817930,
+                "version": 2
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        106.770058,
+                        10.8508548
+                    ],
+                    [
+                        106.770388,
+                        10.8508375
+                    ],
+                    [
+                        106.7712856,
+                        10.8507904
+                    ]
+                ]
+            }
+        }
+    ]
+}
