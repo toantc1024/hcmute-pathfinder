@@ -1,19 +1,50 @@
-import codecs
-import osm2geojson
-import json
+from fastapi import FastAPI
+from app import Map
+from pydantic import BaseModel
 
-with codecs.open('map.osm', 'r', encoding='utf-8') as data:
-    xml = data.read()
+class Item(BaseModel):
+    lat: float
+    lon: float
 
-geojson = osm2geojson.xml2geojson(xml, filter_used_refs=False, log_level='INFO')
-# Serializing json
-def dumpToJson(data):
-    json_object = json.dumps(data, indent=4)
- 
-    # Writing to sample.json
-    with open("sample.json", "w") as outfile:
-        outfile.write(json_object)
+class Route(BaseModel):
+    lat: float
+    lon: float 
+    destination: int
 
-# >> { "type": "FeatureCollection", "features": [ ... ] }
+app = FastAPI()
 
-dumpToJson(geojson)
+map = Map()
+
+@app.post("/map/get_nearest_node/")
+async def get_nearest_node(item: Item):
+    return map.getNearestNode(lat=10.8501, lon=106.7718)
+
+@app.post("/map/find-route/")
+async def findRoute(item: Route):
+    return [
+            [106.7665444, 10.8558775],
+          [106.7665667, 10.8557118],
+          [106.7665451, 10.8555151],
+          [106.7665224, 10.855431],
+          [106.766505, 10.8553668],
+          [106.7664804, 10.855276],
+          [106.7664551, 10.8551992],
+          [106.7664878, 10.8551155],
+          [106.7665263, 10.8550564],
+          [106.766603, 10.8549609],
+          [106.7667269, 10.8548645],
+          [106.766807, 10.8547889],
+          [106.7668655, 10.8547163],
+          [106.7670535, 10.8543985],
+          [106.7671069, 10.8543265],
+          [106.7674016, 10.8539295],
+          [106.7675742, 10.8536844],
+          [106.7676728, 10.8535543],
+          [106.7678268, 10.8533969],
+          [106.7679158, 10.8532987],
+          [106.768133, 10.8531248],
+          [106.7683896, 10.8528781],
+          [106.7684931, 10.8528338],
+          [106.7685505, 10.8528093],
+          [106.7690178, 10.8527016]
+    ]
