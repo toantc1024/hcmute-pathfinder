@@ -19,6 +19,13 @@ map = Map()
 async def get_nearest_node(item: Item):
     return map.getNearestNode(lat=10.8501, lon=106.7718)
 
+@app.get("/map/get_destionation")
+async def get_destionation():
+    return {
+        "destionations": map.getAllBuildings()
+    }
+
+
 @app.post("/map/find-route/")
 async def findShortestPath(item: Route):
     return {

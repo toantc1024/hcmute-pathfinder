@@ -61,13 +61,28 @@ class Map:
                 coordinate = self.graph[node]['info']['geometry']['coordinates']
                 self.coordinates.append([node, coordinate[1], coordinate[0]])
                 self.nodes.append(node)
-            # showMap(self.coordinates)
+            # self.showMap(self.coordinates)
             self.tree = KDTree(self.coordinates)
-    
+        with open('./data/building.json', 'r') as f:
+            self.buildings = json.load(f)
+            self.getAllBuildings()
+
+    def getAllBuildings(self):
+        all_buildings = []
+        for id in self.buildings.keys():
+            building = {}
+            building['id'] = id
+            building['name'] = self.buildings[id]['properties']['tags']['name']
+            all_buildings.append(building)
+        return all_buildings                
+
     def getNearestNode(self, lat, lon):
         # Query the KDTree for the nearest neighbor
         distance, index = self.tree.query([lat, lon])
         return self.graph[self.nodes[index]]
+
+    def getDestionaion(self):
+        return self.graph[self.nodes[0]]
 
     def findShortestPath(self, lat1, lon1, lat2, lon2):
         lon2 = 106.77137
