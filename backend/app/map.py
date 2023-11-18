@@ -1,8 +1,26 @@
 import json
 from scipy.spatial import KDTree
+import pandas as pd 
+import plotly.express as px
+
+class Node():
+    def __init__(self, parent=None, position=None):
+        self.parent = parent
+        self.position = position    
+
+        self.g = 0
+        self.h = 0
+        self.f = 0
+
+    def __eq__(self, other):
+        return self.position == other.position
+
+# class AStar(map, start, end):
+
 
 
 class Map: 
+    
     def __init__(self):
         self.graph = {}
         self.tree = None
@@ -10,6 +28,27 @@ class Map:
         self.nodes = []
         self.loadMapData()
         
+
+    def showMap(self, coordinates):
+        df = pd.DataFrame(coordinates, columns=['id', 'lat', 'lon'])
+        color_scale = [(0, 'orange'), (1,'red')]
+
+        fig = px.scatter_mapbox(df, 
+                                lat="lat", 
+                                lon="lon", 
+                                hover_name="id", 
+                                # hover_data=["Address", "Listed"],
+                                # color="Listed",
+                                color_continuous_scale=color_scale,
+                                # size="Listed",
+                                zoom=8, 
+                                height=800,
+                                width=800)
+
+        fig.update_layout(mapbox_style="open-street-map")
+        fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+        fig.show()
+
     def loadMapData(self):
         # Show directory
         # print(os.listdir())
@@ -18,16 +57,32 @@ class Map:
             # Loop through all entry in graph
             
             for node in self.graph.keys():
-                print(self.graph[node]['info']['geometry']['coordinates'])
+                # print(self.graph[node]['info']['geometry']['coordinates'])
                 coordinate = self.graph[node]['info']['geometry']['coordinates']
-                self.coordinates.append([coordinate[1], coordinate[0]])
+                self.coordinates.append([node, coordinate[1], coordinate[0]])
                 self.nodes.append(node)
+            # showMap(self.coordinates)
             self.tree = KDTree(self.coordinates)
     
     def getNearestNode(self, lat, lon):
         # Query the KDTree for the nearest neighbor
         distance, index = self.tree.query([lat, lon])
         return self.graph[self.nodes[index]]
+
+    def findShortestPath(self, lat1, lon1, lat2, lon2):
+        lon2 = 106.77137
+        lat2 = 10.85109
+
+        node = self.getNearestNode(lat1, lon1)
+        print(node)
+
+        
+
+        # Query the KDTree for the nearest neighbor
+        
+        
+
+    
 
 # data = []
 # def getNodeInfo(lat, lon):
@@ -73,4 +128,4 @@ class Map:
 #     print(coordinates[index])
 #     print(getNodeInfo(coordinates[index][0], coordinates[index][1]))
 
-    
+map = Map()

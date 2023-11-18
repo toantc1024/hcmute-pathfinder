@@ -20,9 +20,11 @@ async def get_nearest_node(item: Item):
     return map.getNearestNode(lat=10.8501, lon=106.7718)
 
 @app.post("/map/find-route/")
-async def findRoute(item: Route):
-    return [
-            [106.7665444, 10.8558775],
+async def findShortestPath(item: Route):
+    return {
+        "status": "success",
+        "solution": [
+          [106.7665444, 10.8558775],
           [106.7665667, 10.8557118],
           [106.7665451, 10.8555151],
           [106.7665224, 10.855431],
@@ -46,5 +48,6 @@ async def findRoute(item: Route):
           [106.7683896, 10.8528781],
           [106.7684931, 10.8528338],
           [106.7685505, 10.8528093],
-          [106.7690178, 10.8527016]
-    ]
+          [106.7690178, 10.8527016]]
+    }
+   

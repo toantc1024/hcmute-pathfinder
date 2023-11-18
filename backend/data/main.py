@@ -56,22 +56,26 @@ with open('sample.json', 'r') as f:
             id = str(entry["properties"]["id"])
             graph.initNewNode(id, entry)
     # Loop through data as entrie
+    types = {}
     for entry in data['features']:
         # Loop through data as key-value pairs
-        if (entry["geometry"]["type"] == "LineString"):
-            lineString = entry["geometry"]["coordinates"]
-            if("nodes" not in entry["properties"]):
-                continue
+        types[entry["properties"]["type"]] = types.get(entry["properties"]["type"], 0) + 1
+    print(types)
+        # if (entry["geometry"]["type"] == "LineString"):
+            # lineString = entry["geometry"]["coordinates"]
+            
+            # if("nodes" not in entry["properties"]):
+            #     continue
 
-            nodeString = entry["properties"]["nodes"]
-            for i in range(0, len(nodeString)-1):
-                id = str(nodeString[i])
-                next_id = str(nodeString[i+1])
-                # Check if id is in Graph
-                if(next_id not in graph.getNodeProps(id, "neighbors")):
-                    graph.addNeighbor(id, next_id)
-                if(id not in graph.getNodeProps(next_id, "neighbors")):
-                    graph.addNeighbor(next_id, id)
-    with open("graph.json", "w") as f:
-        json.dump(graph.graph, f)
+    #         nodeString = entry["properties"]["nodes"]
+    #         for i in range(0, len(nodeString)-1):
+    #             id = str(nodeString[i])
+    #             next_id = str(nodeString[i+1])
+    #             # Check if id is in Graph
+    #             if(next_id not in graph.getNodeProps(id, "neighbors")):
+    #                 graph.addNeighbor(id, next_id)
+    #             if(id not in graph.getNodeProps(next_id, "neighbors")):
+    #                 graph.addNeighbor(next_id, id)
+    # with open("graph.json", "w") as f:
+    #     json.dump(graph.graph, f)
 
