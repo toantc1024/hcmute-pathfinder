@@ -4,7 +4,7 @@ import pandas as pd
 import plotly.express as px
 import heapq 
 from math import *
-DEFAULT_GOAL_RADIUS = 15
+DEFAULT_GOAL_RADIUS = 14
 FAILURE = 'FAILURE'
 def HaversineDistance(first, second):
     lat1, lon1 = first
@@ -80,7 +80,7 @@ class Map:
             self.buildings = json.load(f)
             self.getAllBuildings()
 
-        self.showMap(list(self.graph.keys()), self.coordinates)
+        # self.showMap(list(self.graph.keys()), self.coordinates)
 
     def getAllBuildings(self):
         all_buildings = []

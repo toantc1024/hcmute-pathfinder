@@ -35,6 +35,7 @@ async def findShortestPath(item: Route):
         }
     return {
         "status": "success",
-        "solution": path
+        "solution": path,
+        "target": map.getBuildingCoordinates(item.id),
     }
    
