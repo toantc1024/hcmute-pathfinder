@@ -1,29 +1,17 @@
 import json
-import math
-
+from math import * 
 METER = 1000
-
-def HaversineDistance(a, b, unit=METER):
-    """Give it lat, lon of two node and it will return distance between those two node"""
-    (lon1, lat1) = a 
-    (lon2, lat2) = b
-    EARTH_RADIUS_IN_KILOMETER = 6371
-
-    # Haversine for lon1, lat1, lon2, lat2
-        # Convert degrees to radians
-    lon1, lat1, lon2, lat2 = map(math.radians, [lon1, lat1, lon2, lat2])
-
-    # Haversine formula
-    dlon = lon2 - lon1
-    dlat = lat2 - lat1
-    a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
-    c = 2 * math.asin(math.sqrt(a))
-
-    # Radius of earth in kilometers
-    r = EARTH_RADIUS_IN_KILOMETER
-
-    # Calculate the result
-    return c * r * unit
+def HaversineDistance(first, second):
+    lat1, lon1 = first
+    lat2, lon2 = second
+    R = 6378137 # this is in miles.  For Earth radius in kilometers use 6372.8 km
+    dLat = radians(lat2 - lat1)
+    dLon = radians(lon2 - lon1)
+    lat1 = radians(lat1)
+    lat2 = radians(lat2)
+    a = sin(dLat/2)**2 + cos(lat1)*cos(lat2)*sin(dLon/2)**2
+    c = 2*asin(sqrt(a))
+    return R * c
 
 
 class Graph:
@@ -92,9 +80,9 @@ with open('sample.json', 'r') as f:
                     graph.addNeighbor(id, next_id)
                 if(id not in graph.getNodeProps(next_id, "neighbors")):
                     graph.addNeighbor(next_id, id)
-    with open("graph.json", "w") as f:
+    with open("../backend/app/graph.json", "w") as f:
         json.dump(graph.graph, f)
 
-    with open("building.json", "w") as f:
+    with open("../backend/app/building.json", "w") as f:
         json.dump(buildings, f)
 

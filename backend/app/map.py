@@ -2,6 +2,23 @@ import json
 from scipy.spatial import KDTree
 import pandas as pd 
 import plotly.express as px
+import heapq 
+from math import *
+
+FAILURE = 'FAILURE'
+def HaversineDistance(first, second):
+    lat1, lon1 = first
+    lat2, lon2 = second
+    R = 6378137 # this is in miles.  For Earth radius in kilometers use 6372.8 km
+    dLat = radians(lat2 - lat1)
+    dLon = radians(lon2 - lon1)
+    lat1 = radians(lat1)
+    lat2 = radians(lat2)
+    a = sin(dLat/2)**2 + cos(lat1)*cos(lat2)*sin(dLon/2)**2
+    c = 2*asin(sqrt(a))
+    return R * c
+
+
 
 class Node():
     def __init__(self, parent=None, position=None):
@@ -27,10 +44,15 @@ class Map:
         self.coordinates = []
         self.nodes = []
         self.loadMapData()
-        
 
-    def showMap(self, coordinates):
-        df = pd.DataFrame(coordinates, columns=['id', 'lat', 'lon'])
+    def showMap(self, nodes, coordinates):
+        mapData = [];
+        for i in range(0, len(nodes)):
+            mapData.append([nodes[i], coordinates[i][0], coordinates[i][1]])
+
+
+        df = pd.DataFrame(mapData, columns=['id', 'lat', 'lon'])
+        print(df)
         color_scale = [(0, 'orange'), (1,'red')]
 
         fig = px.scatter_mapbox(df, 
@@ -45,25 +67,20 @@ class Map:
                                 height=800,
                                 width=800)
 
+
         fig.update_layout(mapbox_style="open-street-map")
         fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
         fig.show()
 
     def loadMapData(self):
-        # Show directory
-        # print(os.listdir())
-        with open('./data/graph.json', 'r') as f:
+        with open('./app/graph.json', 'r') as f:
             self.graph = json.load(f)    
-            # Loop through all entry in graph
-            
             for node in self.graph.keys():
-                # print(self.graph[node]['info']['geometry']['coordinates'])
                 coordinate = self.graph[node]['info']['geometry']['coordinates']
-                self.coordinates.append([node, coordinate[1], coordinate[0]])
+                self.coordinates.append([ coordinate[0], coordinate[1]])
                 self.nodes.append(node)
-            # self.showMap(self.coordinates)
             self.tree = KDTree(self.coordinates)
-        with open('./data/building.json', 'r') as f:
+        with open('./app/building.json', 'r') as f:
             self.buildings = json.load(f)
             self.getAllBuildings()
 
@@ -74,73 +91,70 @@ class Map:
             building['id'] = id
             building['name'] = self.buildings[id]['properties']['tags']['name']
             all_buildings.append(building)
-        return all_buildings                
+        return all_buildings              
+      
 
     def getNearestNode(self, lat, lon):
-        # Query the KDTree for the nearest neighbor
-        distance, index = self.tree.query([lat, lon])
-        return self.graph[self.nodes[index]]
+        # Query the K-DTree for the nearest neighbor
+        distance, index =  self.tree.query([lat, lon])
+        print(index)
+        return self.nodes[index]  # return Node object 
 
     def getDestionaion(self):
         return self.graph[self.nodes[0]]
 
-    def findShortestPath(self, lat1, lon1, lat2, lon2):
-        lon2 = 106.77137
-        lat2 = 10.85109
+    class Node:
+        def __init__(self, parent=None, id=None):
+            self.parent = parent
+            self.id = id     
 
-        node = self.getNearestNode(lat1, lon1)
-        print(node)
+            self.g = 0
+            self.h = 0
+            self.f = 0
 
-        
-
-        # Query the KDTree for the nearest neighbor
-        
-        
-
+        def __eq__(self, other):
+            return self.id == other.id
     
+    def getNodeCoordinateById(self, id):
+        node = self.graph[id]["info"]["geometry"]["coordinates"]
+        return node
 
-# data = []
-# def getNodeInfo(lat, lon):
-#     features = data['features']
-#     for feature in features:
-#         if feature["properties"]["type"] == "node":
-#             if (feature["geometry"]["coordinates"][0] == lon and feature["geometry"]["coordinates"][1] == lat):
-#                 return feature
+    def getNeighbors(self, id):
+        data = self.graph[id]['neighbors']
+        neighbors = []
+        for neighbor in data:
+            neighbors.append((neighbor, HaversineDistance(self.getNodeCoordinateById(id), self.getNodeCoordinateById(neighbor))))
+        return neighbors
 
-# # Load the coordinates from the JSON file
-# with open('./data/sample.json', 'r') as f:
-#     nodes = []
-#     coordinates = []
-#     data = json.load(f)
-#     features = data['features']
-#     for feature in features:
-#         if feature["properties"]["type"] == "node":
-#             nodes.append(feature)
-#     # Swap lat and lon for each coordinate to match KDTree input
-#     for node in nodes:
-#         # [[lat, lon]] = [node["geometry"]["coordinates"][1], node["geometry"]["coordinates"][0]]
-#         # coordinates.append([lat, lon])
-#         # print([lat, lon])
-#         lat, lon = node["geometry"]["coordinates"][0], node["geometry"]["coordinates"][1]
-#         coordinates.append([lon, lat])
+    def AStar(self, start, goal_test, graph):
+        # openSet = [new Node(start)]
+        # node = Node(None, start)
+        # frontier = [node]
+        # explored = []
 
-#     # Build the KDTree
-#     tree = KDTree(coordinates)
-# #   How do I add more information to my query?
-# #   https://stackoverflow.com/questions/52386730/how-do-i-add-more-information-to-my-query
-
-#     # Specify the GPS coordinate
-    
-# # Specify the GPS coordinate
-#     lat = 10.84992
-#     lon = 106.77164
-
-#     # Query the KDTree for the nearest neighbor
-#     distance, index = tree.query([lat, lon])
+        # while(len(frontier) > 0):
+        #     node = heapq.heappop(frontier)
+        #     if(goal_test(node.id)):
+        #         return node
+        #     explored.append(node)
+        #     for action in self.getNeighbors(node.id):   
+        #         child = Node(node, action)
+        #         if(not ((child in frontier) or (child in explored))):
+        #             heapq.heappush(frontier, child)
+        #         elif:
+                    
+        return FAILURE
 
 
-#     # Print the nearest neighbor
-#     print(coordinates[index])
-#     print(getNodeInfo(coordinates[index][0], coordinates[index][1]))
+    def findShortestPath(self, lat, lon, type, target_id):
+        nodes = ['root']
+        coords = [[lat, lon]]
 
-map = Map()
+        start_node = self.getNearestNode(lon, lat)
+        neighbors = self.getNeighbors(start_node)
+        for neighbor in neighbors:
+            nodes.append(neighbor[0])
+            coords.append(list(reversed(self.getNodeCoordinateById(neighbor[0]))))
+
+
+        # self.showMap(nodes, coords)
