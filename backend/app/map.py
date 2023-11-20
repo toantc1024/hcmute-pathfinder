@@ -80,7 +80,7 @@ class Map:
             self.buildings = json.load(f)
             self.getAllBuildings()
 
-        # self.showMap(list(self.graph.keys()), self.coordinates)
+        self.showMap(list(self.graph.keys()), self.coordinates)
 
     def getAllBuildings(self):
         all_buildings = []
@@ -144,7 +144,7 @@ class Map:
                 for p in path:
                     nodes.append(p)
                     coords.append(list(reversed(self.getNodeCoordinateById(p))))
-                # self.showMap(nodes, coords)
+                self.showMap(nodes, coords)
                 print(coords)
                 return coords
             closed_list.append(node)
@@ -157,7 +157,6 @@ class Map:
                 children.append(child)
                 # coords.append(list(reversed(self.getNodeCoordinateById(neighbor))))
 
-        # self.showMap(nodes, coords)
 
             for child in children:
                 is_in_open_list = False
@@ -193,7 +192,7 @@ class Map:
                 #     if (child not in open_list):
                 #         heapq.heappush(open_list, (child.f, child)) 
         print('Failed')
-        # self.showMap(nodes, coords)
+        self.showMap(nodes, coords)
         return FAILURE
 
     def getBuildingCoordinates(self, id):
@@ -205,7 +204,8 @@ class Map:
 
         def heuristic(current_node_id, target_id=target_id):
             node_pos = self.getNodeCoordinateById(current_node_id)
-            coordinates = self.getBuildingCoordinates(target_id)
+            coordinates = self.getBuildingCoordinates(target_id) 
+            print(coordinates)
             min_distance = HaversineDistance(node_pos, coordinates[0])
             for coordinate in coordinates:
                 min_distance = min(min_distance, HaversineDistance(node_pos, coordinate))
