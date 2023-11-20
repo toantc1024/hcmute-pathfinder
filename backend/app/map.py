@@ -4,8 +4,7 @@ import pandas as pd
 import plotly.express as px
 import heapq 
 from math import *
-
-DEFAULT_GOAL_RADIUS = 20
+DEFAULT_GOAL_RADIUS = 15
 FAILURE = 'FAILURE'
 def HaversineDistance(first, second):
     lat1, lon1 = first
@@ -30,7 +29,7 @@ class MapNode:
         self.f = 0
 
     def __eq__(self, other):
-        return self.info == other.info
+        return other is not None and self.id == other.id
 
 
 class Map: 
@@ -120,26 +119,81 @@ class Map:
         #     # neighbors.append((neighbor, self.getDistanceBetweenId(id, neighbor)))
         # return neighbors
 
-    def AStar(self, start, goal_test):
+    def AStar(self, start, goal_test, heuristic):
         node = MapNode(None, start)
-        open_list = [node]
+        
+        node.h = heuristic(node.id)
+        node.g = 0
+        node.f = node.g + node.h
+
+        open_list = [(node.f, node)]
+        
         closed_list = []
 
+        nodes = ['root']
+        coords = [list(reversed(self.getNodeCoordinateById(start)))]
         while(len(open_list) > 0):
-            node = heapq.heappop(open_list)
-            node.f = node.g + node.h
+            node = heapq.heappop(open_list)[1]
             if (goal_test(node.id)):
-                return ['FOUND SOLUTION!']
-            children = self.getNeighbors(node.id)
+                path = []
+                while(node.parent != None):
+                    path.append(node.id)
+                    node = node.parent
+                path.append(node.id)
+                path.reverse()
+                for p in path:
+                    nodes.append(p)
+                    coords.append(list(reversed(self.getNodeCoordinateById(p))))
+                # self.showMap(nodes, coords)
+                print(coords)
+                return coords
+            closed_list.append(node)
+            children = []
+            for neighbor in self.getNeighbors(node.id):
+                child = MapNode(parent=node, id=neighbor)
+                child.g = node.g + self.getDistanceBetweenId(node.id, neighbor)
+                child.h = heuristic(child.id)
+                child.f = child.g + child.h
+                children.append(child)
+                # coords.append(list(reversed(self.getNodeCoordinateById(neighbor))))
 
-            successors = []
+        # self.showMap(nodes, coords)
+
             for child in children:
-                successors.append(MapNode(parent=node, id=child))
+                is_in_open_list = False
+                for item in open_list:
+                    if (item[1].id == child.id):
+                        is_in_open_list = True
+                if is_in_open_list:
+                    continue
+                is_in_closed_list = False
+                for item in closed_list:
+                    if (item.id == child.id):
+                        is_in_closed_list = True
 
-            for successor in successors:
-                # f = g + heuristic
-                child_current_cost = node.g + self.getDistanceBetweenId(node.id, successor.id)
+                if is_in_closed_list:
+                    continue
 
+
+                heapq.heappush(open_list, (child.f, child))
+                # successor_current_cost = node.g + self.getDistanceBetweenId(node.id, child.id)
+                # print(child.id, successor_current_cost)
+                # is_in_open_list = False
+                # for item in open_list:
+                #     if (item[1].id == child.id):
+                #         is_in_open_list = True
+                # if(is_in_open_list):
+                #     if node.g 
+
+                
+                # if (successor_current_cost < child.g):
+                #     child.parent = node
+                #     child.g = successor_current_cost
+                #     child.f = child.g + heuristic(child.id)
+                #     if (child not in open_list):
+                #         heapq.heappush(open_list, (child.f, child)) 
+        print('Failed')
+        # self.showMap(nodes, coords)
         return FAILURE
 
     def getBuildingCoordinates(self, id):
@@ -147,25 +201,19 @@ class Map:
     
 
     def findShortestPath(self, lat, lon, type, target_id):
-        nodes = ['root']
-        coords = [[lat, lon]]
-        def goalTestByBuildingId(current_node_id, target_id=target_id):
+
+
+        def heuristic(current_node_id, target_id=target_id):
             node_pos = self.getNodeCoordinateById(current_node_id)
             coordinates = self.getBuildingCoordinates(target_id)
             min_distance = HaversineDistance(node_pos, coordinates[0])
             for coordinate in coordinates:
-                print(node_pos, coordinate, HaversineDistance(node_pos, coordinate))
                 min_distance = min(min_distance, HaversineDistance(node_pos, coordinate))
-            return min_distance <= DEFAULT_GOAL_RADIUS
+            return min_distance 
+
+        def goalTestByBuildingId(current_node_id, target_id=target_id):
+            return heuristic(current_node_id, target_id) <= DEFAULT_GOAL_RADIUS
 
         start_node = self.getNearestNode(lat, lon)
-        # neighbors = self.getNeighbors(start_node)
-        self.AStar(start_node, goalTestByBuildingId)
+        return self.AStar(start_node, goalTestByBuildingId, heuristic)
         # print(self.goalTestByBuildingId(start_node, target_id))
-        # for neighbor in neighbors:
-        #     nodes.append(neighbor[0])
-        #     print(start_node, '->',neighbor[0])
-        #     coords.append(list(reversed(self.getNodeCoordinateById(neighbor[0]))))
-        # print(neighbors)
-
-        # self.showMap(nodes, coords)
