@@ -1,0 +1,132 @@
+import json
+
+# Dữ liệu JSON bạn đã cung cấp
+json_data = '''
+[
+    {
+        "Index": 1,
+        "Area": "Xưởng thực tập nguội",
+        "Latitude": 10.851113892921617,
+        "Longitude": 106.76959259323007
+    },
+    {
+        "Index": 2,
+        "Area": "Xưởng thực tập in",
+        "Latitude": 10.851192687406908,
+        "Longitude": 106.76985960642213
+    },
+    {
+        "Index": 3,
+        "Area": "Văn phòng khoa CKM",
+        "Latitude": 10.85019771642024,
+        "Longitude": 106.76971108202588
+    },
+    {
+        "Index": 4,
+        "Area": "Xưởng TH nghề 1",
+        "Latitude": 10.850780898636188,
+        "Longitude": 106.76979141500965
+    },
+    {
+        "Index": 5,
+        "Area": "Xưởng TH nghề 2",
+        "Latitude": 10.850767758190486,
+        "Longitude": 106.77032849996192
+    },
+    {
+        "Index": 6,
+        "Area": "Khu công nghệ cao",
+        "Latitude": 10.851363089150553,
+        "Longitude": 106.77048859852965
+    },
+    {
+        "Index": 7,
+        "Area": "Căn tin A",
+        "Latitude": 10.851332990681982,
+        "Longitude": 106.77098273694827
+    },
+    {
+        "Index": 8,
+        "Area": "Siêu thị sinh viên",
+        "Latitude": 10.851011411114385,
+        "Longitude": 106.77090194523174
+    },
+    {
+        "Index": 9,
+        "Area": "KTX C",
+        "Latitude": 10.850630661488779,
+        "Longitude": 106.77098012750372
+    },
+    {
+        "Index": 10,
+        "Area": "Tòa nhà trung tâm",
+        "Latitude": 10.85089733557497,
+        "Longitude": 106.7719611511036
+    },
+    {
+        "Index": 11,
+        "Area": "Sân vận động",
+        "Latitude": 10.850618685178077,
+        "Longitude": 106.77282051838307
+    },
+    {
+        "Index": 12,
+        "Area": "Khu A",
+        "Latitude": 10.852027042506705,
+        "Longitude": 106.77212242019237
+    },
+    {
+        "Index": 13,
+        "Area": "Thư viện ĐH Sư Phạm kĩ thuật",
+        "Latitude": 10.852619246464585,
+        "Longitude": 106.7721558795605
+    },
+    {
+        "Index": 14,
+        "Area": "Khu D",
+        "Latitude": 10.852376314183886,
+        "Longitude": 106.77165038334397
+    },
+    {
+        "Index": 15,
+        "Area": "Khu C",
+        "Latitude": 10.853324209273978,
+        "Longitude": 106.77176629008034
+    },
+    {
+        "Index": 16,
+        "Area": "Khu B",
+        "Latitude": 10.853229171074943,
+        "Longitude": 106.77227963456664
+    },
+    {
+        "Index": 17,
+        "Area": "KTX D",
+        "Latitude": 10.853784309084276,
+        "Longitude": 106.7725514166276
+    },
+    {
+        "Index": 18,
+        "Area": "F1",
+        "Latitude": 10.851934726374864,
+        "Longitude": 106.77311149432126
+    },
+    {
+        "Index": 19,
+        "Area": "Xưởng máy",
+        "Latitude": 10.852665989305237,
+        "Longitude": 106.77298833328814
+    }
+]
+'''
+
+# Chuyển đổi chuỗi JSON thành cấu trúc dữ liệu Python
+data = json.loads(json_data)
+
+# In ra thông tin chi tiết từ danh sách đối tượng
+for obj in data:
+    print(f"Index: {obj['Index']}")
+    print(f"Area: {obj['Area']}")
+    print(f"Latitude: {obj['Latitude']}")
+    print(f"Longitude: {obj['Longitude']}")
+    print("-------------------")
