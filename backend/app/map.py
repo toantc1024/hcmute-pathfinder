@@ -80,7 +80,7 @@ class Map:
             self.buildings = json.load(f)
             self.getAllBuildings()
 
-        # self.showMap(list(self.graph.keys()), self.coordinates)
+        self.showMap(list(self.graph.keys()), self.coordinates)
 
     def getAllBuildings(self):
         all_buildings = []
@@ -111,13 +111,6 @@ class Map:
 
     def getNeighbors(self, id):
         return self.graph[id]['neighbors']
-        # neighbors = []
-        # for neighbor in data:
-        #     # print(neighbor)
-
-        #     neighbor
-        #     # neighbors.append((neighbor, self.getDistanceBetweenId(id, neighbor)))
-        # return neighbors
 
     def AStar(self, start, goal_test, heuristic):
         node = MapNode(None, start)
@@ -130,7 +123,7 @@ class Map:
         
         closed_list = []
 
-        nodes = ['root']
+        nodes = [start]
         coords = [list(reversed(self.getNodeCoordinateById(start)))]
         while(len(open_list) > 0):
             node = heapq.heappop(open_list)[1]
@@ -173,24 +166,7 @@ class Map:
                 if is_in_closed_list:
                     continue
 
-
                 heapq.heappush(open_list, (child.f, child))
-                # successor_current_cost = node.g + self.getDistanceBetweenId(node.id, child.id)
-                # print(child.id, successor_current_cost)
-                # is_in_open_list = False
-                # for item in open_list:
-                #     if (item[1].id == child.id):
-                #         is_in_open_list = True
-                # if(is_in_open_list):
-                #     if node.g 
-
-                
-                # if (successor_current_cost < child.g):
-                #     child.parent = node
-                #     child.g = successor_current_cost
-                #     child.f = child.g + heuristic(child.id)
-                #     if (child not in open_list):
-                #         heapq.heappush(open_list, (child.f, child)) 
         print('Failed')
         self.showMap(nodes, coords)
         return FAILURE

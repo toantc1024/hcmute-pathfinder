@@ -49,7 +49,11 @@ with open('sample.json', 'r') as f:
     #     "uid": 1377843,
     #     "version": 1
     #   },
-        if(entry["properties"]["type"] == "way" and "tags" in entry["properties"] and "building" in entry["properties"]["tags"] and "name" in entry["properties"]["tags"]):
+        if(entry["properties"]["type"] == "way" and "tags" in entry["properties"] and "building" in entry["properties"]["tags"]):
+                
+            if("name" not in entry["properties"]["tags"]):
+                entry["properties"]["tags"]["name"] = "Unknown"
+                
             buildings[entry["properties"]["id"]] = entry
 
 
