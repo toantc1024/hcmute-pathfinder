@@ -80,7 +80,7 @@ class Map:
             self.buildings = json.load(f)
             self.getAllBuildings()
 
-        self.showMap(list(self.graph.keys()), self.coordinates)
+        # self.showMap(list(self.graph.keys()), self.coordinates)
 
     def getAllBuildings(self):
         all_buildings = []
@@ -137,7 +137,7 @@ class Map:
                 for p in path:
                     nodes.append(p)
                     coords.append(list(reversed(self.getNodeCoordinateById(p))))
-                self.showMap(nodes, coords)
+                # self.showMap(nodes, coords)
                 print(coords)
                 return coords
             closed_list.append(node)
@@ -167,8 +167,8 @@ class Map:
                     continue
 
                 heapq.heappush(open_list, (child.f, child))
-        print('Failed')
-        self.showMap(nodes, coords)
+        # print('Failed')
+        # self.showMap(nodes, coords)
         return FAILURE
 
     def getBuildingCoordinates(self, id):
