@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from app import Map
 from pydantic import BaseModel
 
+from constants import *
+
 class Item(BaseModel):
     lat: float
     lon: float
@@ -28,7 +30,7 @@ async def get_destionation():
 
 @app.post("/map/find-route")
 async def findShortestPath(item: Route):
-    path = map.findShortestPath(lat=item.lat, lon=item.lon, target_id=item.id, type=item.type)
+    path = map.findShortestPath(lat=item.lat, lon=item.lon, target_id=item.id, type=item.type, algorithm=ASTAR)
     if (path == 'FAILURE'):
         return {
             "status": "failure"
@@ -39,3 +41,12 @@ async def findShortestPath(item: Route):
         "target": map.getBuildingCoordinates(item.id),
     }
    
+#
+# Example query for post:map/find-route
+#  {
+#   "lon": 106.77268,
+#   "lat": 10.84999,
+#   "type": "building",
+#   "id": "239828235"
+# }
+ 

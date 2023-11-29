@@ -1,0 +1,3 @@
+ASTAR = "ASTAR"
+BFS = "BFS"
+DFS = "DFS"

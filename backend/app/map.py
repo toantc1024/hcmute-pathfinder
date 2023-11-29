@@ -4,6 +4,8 @@ import pandas as pd
 import plotly.express as px
 import heapq 
 from math import *
+from constants import *
+
 DEFAULT_GOAL_RADIUS = 14
 FAILURE = 'FAILURE'
 def HaversineDistance(first, second):
@@ -48,7 +50,6 @@ class Map:
 
 
         df = pd.DataFrame(mapData, columns=['id', 'lat', 'lon'])
-        print(df)
         color_scale = [(0, 'orange'), (1,'red')]
 
         fig = px.scatter_mapbox(df, 
@@ -95,7 +96,6 @@ class Map:
     def getNearestNode(self, lat, lon):
         # Query the K-DTree for the nearest neighbor
         distance, index =  self.tree.query([lat, lon])
-        print(index)
         return self.nodes[index]  # return Node object 
 
     def getDestionaion(self):
@@ -112,9 +112,19 @@ class Map:
     def getNeighbors(self, id):
         return self.graph[id]['neighbors']
 
+    def BFS(self, start, goal_test):
+        # Quang
+        pass 
+
+    def DFS(self, start, goal_test):
+        # Cuong
+        pass 
+
     def AStar(self, start, goal_test, heuristic):
+        # Toan
         node = MapNode(None, start)
         
+        # Heuristic cost
         node.h = heuristic(node.id)
         node.g = 0
         node.f = node.g + node.h
@@ -123,10 +133,12 @@ class Map:
         
         closed_list = []
 
-        nodes = [start]
-        coords = [list(reversed(self.getNodeCoordinateById(start)))]
+        explored_nodes = nodes = [start]
+        explored_coords = coords = [list(reversed(self.getNodeCoordinateById(start)))]
         while(len(open_list) > 0):
             node = heapq.heappop(open_list)[1]
+            explored_nodes.append(node.id)
+            explored_coords.append(list(reversed(self.getNodeCoordinateById(node.id))))
             if (goal_test(node.id)):
                 path = []
                 while(node.parent != None):
@@ -134,11 +146,15 @@ class Map:
                     node = node.parent
                 path.append(node.id)
                 path.reverse()
+                # Show solution map
                 for p in path:
                     nodes.append(p)
                     coords.append(list(reversed(self.getNodeCoordinateById(p))))
+                # Show explored map
                 # self.showMap(nodes, coords)
-                print(coords)
+                # Show explored map
+                self.showMap(explored_nodes, explored_coords)
+
                 return coords
             closed_list.append(node)
             children = []
@@ -149,7 +165,6 @@ class Map:
                 child.f = child.g + child.h
                 children.append(child)
                 # coords.append(list(reversed(self.getNodeCoordinateById(neighbor))))
-
 
             for child in children:
                 is_in_open_list = False
@@ -175,13 +190,10 @@ class Map:
         return self.buildings[id]["geometry"]["coordinates"][0]
     
 
-    def findShortestPath(self, lat, lon, type, target_id):
-
-
+    def findShortestPath(self, lat, lon, type, target_id, algorithm):
         def heuristic(current_node_id, target_id=target_id):
             node_pos = self.getNodeCoordinateById(current_node_id)
             coordinates = self.getBuildingCoordinates(target_id) 
-            print(coordinates)
             min_distance = HaversineDistance(node_pos, coordinates[0])
             for coordinate in coordinates:
                 min_distance = min(min_distance, HaversineDistance(node_pos, coordinate))
@@ -191,5 +203,10 @@ class Map:
             return heuristic(current_node_id, target_id) <= DEFAULT_GOAL_RADIUS
 
         start_node = self.getNearestNode(lat, lon)
-        return self.AStar(start_node, goalTestByBuildingId, heuristic)
+        if(algorithm == DFS):
+            return self.BFS(start_node, goal_test=goalTestByBuildingId)
+        elif (algorithm == BFS):
+            return self.DFS(start_node, goal_test=goalTestByBuildingId)
+        elif (algorithm == ASTAR):
+            return self.AStar(start_node,goal_test=goalTestByBuildingId, heuristic=heuristic)
         # print(self.goalTestByBuildingId(start_node, target_id))
