@@ -30,7 +30,7 @@ async def get_destionation():
 
 @app.post("/map/find-route")
 async def findShortestPath(item: Route):
-    path = map.findShortestPath(lat=item.lat, lon=item.lon, target_id=item.id, type=item.type, algorithm=ASTAR)
+    path = map.findShortestPath(lat=item.lat, lon=item.lon, target_id=item.id, type=item.type, algorithm=BFS)
     if (path == 'FAILURE'):
         return {
             "status": "failure"

@@ -5,7 +5,7 @@ import plotly.express as px
 import heapq 
 from math import *
 from constants import *
-
+from collections import deque
 DEFAULT_GOAL_RADIUS = 14
 FAILURE = 'FAILURE'
 def HaversineDistance(first, second):
@@ -113,8 +113,47 @@ class Map:
         return self.graph[id]['neighbors']
 
     def BFS(self, start, goal_test):
-        # Quang
-        pass 
+        #Quang
+        #tạo node đầu none
+        start_node = MapNode(None, start)
+        #hàng đợi 2 chiều
+        queue = deque([start_node])
+        explored_nodes = set()  
+
+        path = []  
+
+        while queue:
+            current_node = queue.popleft()
+
+            if current_node.id in explored_nodes:
+                continue
+
+            explored_nodes.add(current_node.id)
+
+            for neighbor_id in self.getNeighbors(current_node.id):
+                if neighbor_id not in explored_nodes:
+                    neighbor_node = MapNode(parent=current_node, id=neighbor_id)
+                    queue.append(neighbor_node)
+
+                    if goal_test(neighbor_id):
+                        # Reached the goal, accumulate the path
+                        while neighbor_node:
+                            path.append(neighbor_node.id)
+                            neighbor_node = neighbor_node.parent
+
+                        # Reverse the path to get the correct order
+                        path.reverse()
+
+                        # Show the map with the entire path
+                        nodes = path
+                        coords = [list(reversed(self.getNodeCoordinateById(p))) for p in path]
+                        self.showMap(nodes, coords)
+
+                        return path
+
+        # If the queue is empty and no goal is found
+        return FAILURE
+
 
     def DFS(self, start, goal_test):
         # Cuong
@@ -133,8 +172,10 @@ class Map:
         
         closed_list = []
 
-        explored_nodes = nodes = [start]
-        explored_coords = coords = [list(reversed(self.getNodeCoordinateById(start)))]
+        explored_nodes = [start]
+        nodes = [start]
+        explored_coords = [list(reversed(self.getNodeCoordinateById(start)))]
+        coords= [list(reversed(self.getNodeCoordinateById(start)))]
         while(len(open_list) > 0):
             node = heapq.heappop(open_list)[1]
             explored_nodes.append(node.id)
@@ -151,9 +192,9 @@ class Map:
                     nodes.append(p)
                     coords.append(list(reversed(self.getNodeCoordinateById(p))))
                 # Show explored map
-                # self.showMap(nodes, coords)
+                self.showMap(nodes, coords)
                 # Show explored map
-                self.showMap(explored_nodes, explored_coords)
+                # self.showMap(explored_nodes, explored_coords)
 
                 return coords
             closed_list.append(node)
@@ -203,9 +244,9 @@ class Map:
             return heuristic(current_node_id, target_id) <= DEFAULT_GOAL_RADIUS
 
         start_node = self.getNearestNode(lat, lon)
-        if(algorithm == DFS):
+        if(algorithm == BFS):
             return self.BFS(start_node, goal_test=goalTestByBuildingId)
-        elif (algorithm == BFS):
+        elif (algorithm == DFS):
             return self.DFS(start_node, goal_test=goalTestByBuildingId)
         elif (algorithm == ASTAR):
             return self.AStar(start_node,goal_test=goalTestByBuildingId, heuristic=heuristic)
