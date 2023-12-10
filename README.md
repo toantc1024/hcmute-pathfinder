@@ -1,33 +1,37 @@
-# hcmute-pathfinder
+## Đồ án cuối kì môn học Trí Tuệ Nhân Tạo
 
-Final project for Artificial Course in HCMUTE 2023
-How to run?
+- Ứng dụng thuật toán BFS và GreedyBest First Search vào trong AI lập thời gian học tập cho 1 tuần làm việc
 
-1. `pip install fastapi uvicorn pydantic`
-2. `cd ./backend`
-3. `python3 -m uvicorn main:app --reload`
+# 1. Backend
 
-`
-@app.post("/map/get_nearest_node/")
-async def get_nearest_node(item: Item):
-    return map.getNearestNode(lat=10.8501, lon=106.7718)
+Dẫn tới thư mục chứa backend,
 
-@app.get("/map/get_destination")
-async def get_destionation():
-    return {
-        "destionations": map.getAllBuildings()
+`cd backend`
+
+Tạo môi trường ảo
+`python3 -m venv venv`
+
+Kích hoạt môi trường ảo
+Linux: `source venv/bin/active`
+Windows: `venv\Scripts\activate`
+
+Cài đặt các gói thư viện của python
+`pip install -r requirements.txt`
+
+Khởi chạy backend
+`uvicorn main:app --reload`
+
+Thầy có thể dùng đường link này để test sau khi chạy backend: `localhost:8000/docs`
+
+Sample request:
+
+```
+    {
+        "lat": 10.8501115,
+        "lon": 106.7725223,
+        "id":  "239828234",
+        "type": "building"
     }
+```
 
-@app.post("/map/find-route")
-async def findShortestPath(item: Route):
-    path = map.findShortestPath(lat=item.lat, lon=item.lon, target_id=item.id, type=item.type)
-    if (path == 'FAILURE'):
-        return {
-            "status": "failure"
-        }
-    return {
-        "status": "success",
-        "solution": path
-    }
-
-   `
+![Alt text](image.png)
